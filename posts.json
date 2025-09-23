@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "name": "postName",
+        "description": "postDescription",
+        "img": "img1",
+        "likes": 100
+    },
+
+
+
+    {
+        "id": 11,
+        "name": "postName1",
+        "description": "postDescription1",
+        "img": "img2",
+        "likes": 1001
+    },
+
+
+
+    {
+        "id": 111,
+        "name": "postName11",
+        "description": "postDescription11",
+        "img": "img3",
+        "likes": 10011
+    }
+]
