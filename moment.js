@@ -21,6 +21,27 @@ function getDate(){
 app.get("/posts",(req,res) =>[
     res.status(200).json(posts)
 ])
+
+app.get("/posts/:id",(req, res)=>{
+    const id = +req.params.id
+    if (isNaN(id)){
+        res.status(400).json("id must be an integer");
+        return;
+    }
+    const post = posts.find((pr)=>{
+        const isMatch = pr.id === id
+        return isMatch
+    })
+
+    if (!post){
+        res.status(404).json("post not found")
+        return;
+    }
+
+    res.json(post)
+})
+
+
 app.get("/timestamp", (req, res) =>{
     res.json("" + getDate());
 })
