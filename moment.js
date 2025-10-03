@@ -2,8 +2,10 @@ const moment = require('moment');
 const express = require('express')
 const path = require("path")
 const fs = require("fs")
-const app = express()
+const fsPromises = require("fs/promises")
 
+const app = express()
+app.use(express.json())
 
 const PORT = 8000
 const HOST = 'localhost'
@@ -23,7 +25,6 @@ function getDate(){
 // ])
 
 app.get("/posts", (req,res)=>{
-    console.log(req.query)
     const take = req.query.take
     const skip = req.query.skip
 
@@ -81,7 +82,39 @@ app.get("/posts/:id",(req, res)=>{
 app.get("/timestamp", (req, res) =>{
     res.json("" + getDate());
 })
+app.post("/posts", async (req, res) => {
+    const body = req.body
+    const CreationPost = { ...body, id: posts.length + 1 }
 
+    if (!body) {
+        res.status(422).json("problem with the body ")
+        return
+    }
+
+    if (!CreationPost.name) {
+        res.status(422).json("problem with the name")
+        return
+    }
+
+    if (!CreationPost.description) {
+        res.status(422).json("problem with the description")
+        return
+    }
+
+    if (!CreationPost.img) {
+        res.status(422).json("problem with the image")
+        return
+    }
+
+    try{
+        
+        posts.push(CreationPost)
+        await fsPromises.writeFile(postsPath, JSON.stringify(posts, null, 2))
+        res.status(201).json(CreationPost)
+    } catch (error){
+        res.status(500).json("Creation error")
+    }
+})
 
 app.listen(PORT, HOST, () => {
     console.log(`Server started on http://${HOST}:${PORT}`)
