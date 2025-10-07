@@ -1,5 +1,5 @@
 
-const PostService = require('./Post.service')
+const PostService = require('./post.service')
 const moment = require("moment")
 
 function getDate() {

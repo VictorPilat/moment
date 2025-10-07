@@ -1,5 +1,5 @@
 const express = require("express")
-const PostController = require("./Post.controller")
+const PostController = require("./post.controller")
 
 const Postrouter = express.Router()
 Postrouter.get("/posts/", PostController.getAll)
