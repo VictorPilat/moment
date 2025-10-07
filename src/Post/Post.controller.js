@@ -7,7 +7,7 @@ function getDate() {
 }
 
 const PostController = {
-        getAll: (req, res) => { 
+    getAll: (req, res) => { 
 
         const skip = req.query.skip
         const take = req.query.take
@@ -35,22 +35,22 @@ const PostController = {
         
     },
     getById: (req, res) => {
-    const id = +req.params.id
-    console.log(id)
+        const id = +req.params.id
+        console.log(id)
 
-    if (isNaN(id)) {
-        res.status(400).json("id must be an integer")
-        return
-    }
+        if (isNaN(id)) {
+            res.status(400).json("id must be an integer")
+            return
+        }
 
-    const post = PostService.getById(id)
+        const post = PostService.getById(id)
 
-    if (!post) {
-        res.status(404).json("post not found")
-        return
-    }
+        if (!post) {
+            res.status(404).json("post not found")
+            return
+        }
 
-    res.json(post)
+        res.json(post)
     },
     create: async (req, res) => {
         console.log(req.body)
