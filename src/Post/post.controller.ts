@@ -1,16 +1,16 @@
-
-const PostService = require('./post.service')
-const moment = require("moment")
+import moment from "moment"
+import { Request, Response } from "express"
+import PostService from "./post.service"
 
 function getDate() {
     return moment().format("Y/MM/DD H:mm:ss")
 }
 
 const PostController = {
-    getAll: (req, res) => { 
+    getAll: (req: Request, res: Response) => {
 
-        const skip = req.query.skip
-        const take = req.query.take
+        const skip = Number(req.query.skip)
+        const take = Number(req.query.take)
 
         if (skip) {
             if (isNaN(+skip)) {
@@ -34,7 +34,11 @@ const PostController = {
         return
         
     },
-    getById: (req, res) => {
+    getById: (req: Request, res: Response) => {
+        if (!req.params.id){
+            res.status(400).json("required");
+            return
+        }
         const id = +req.params.id
         console.log(id)
 
@@ -52,7 +56,7 @@ const PostController = {
 
         res.json(post)
     },
-    create: async (req, res) => {
+    create: async (req: Request, res: Response) => {
         console.log(req.body)
         const body = req.body
 
@@ -85,18 +89,16 @@ const PostController = {
 
         res.status(201).json(post)
     },
-    getTimestamp: (req, res) => {
+    getTimestamp: (req: Request, res: Response) => {
         res.json(getDate())
     },
  
 
 }
 
-module.exports = PostController
 
 
-
-
+export default PostController
 
 
 
