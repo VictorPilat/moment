@@ -1,6 +1,7 @@
 import moment from "moment"
 import { Request, Response } from "express"
 import PostService from "./post.service"
+import { UpdatePostData } from "./post.types"
 
 function getDate() {
     return moment().format("Y/MM/DD H:mm:ss")
@@ -89,6 +90,41 @@ const PostController = {
 
         res.status(201).json(post)
     },
+    update: async (req: Request, res: Response) => {
+        const id = req.params.id
+        
+        if (!id) {
+            res.status(400).json("id is required")
+            return
+        }
+        
+        const body = req.body 
+
+        if (body.name && typeof body.name !== 'string') {
+            res.status(400).json(" name is not a string")
+            return
+        }
+
+        if (body.description && typeof body.description !== 'string') {
+            res.status(400).json(" description is not a string")
+            return
+        }
+
+        if (body.img && typeof body.img !== 'string') {
+            res.status(400).json(" image URL is not a string")
+            return
+        }
+
+        const post = await PostService.update(+id, body)
+        
+        if (!post) {
+            res.status(404).json("Post not found")
+            return
+        }
+        
+        res.status(200).json(post)
+    },
+
     getTimestamp: (req: Request, res: Response) => {
         res.json(getDate())
     },

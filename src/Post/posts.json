@@ -11,21 +11,21 @@
         "name": "postName1",
         "description": "postDescription1",
         "img": "img2",
-        "likes": 1001
+        "likes": 10322301
     },
     {
-        "id": 3,
-        "name": "postName11",
-        "description": "postDescription11",
-        "img": "img3",
-        "likes": 10011
+        "id": 2,
+        "name": "postName1",
+        "description": "postDescription1",
+        "img": "img2",
+        "likes": 10322301
     },
     {
         "id": 4,
-        "name": "postName",
-        "description": "postDescription",
-        "img": "img1",
-        "likes": 100
+        "name": "postName1",
+        "description": "postDeqqqqqqqqscription1",
+        "img": "img2",
+        "likes": 0
     },
     {
         "id": 5,
@@ -82,5 +82,17 @@
         "description": "testr post1",
         "img": "image.png",
         "id": 13
+    },
+    {
+        "name": "post",
+        "description": "testr post1",
+        "img": "image.png",
+        "id": 14
+    },
+    {
+        "name": "О пост",
+        "description": "этот пост обн11овлён",
+        "img": ".jpg",
+        "id": 15
     }
 ]
