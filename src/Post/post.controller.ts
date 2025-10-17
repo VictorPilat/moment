@@ -2,13 +2,16 @@ import moment from "moment"
 import { Request, Response } from "express"
 import PostService from "./post.service"
 import { UpdatePostData } from "./post.types"
+import { PostControllerContract } from "./post.types"
+
 
 function getDate() {
     return moment().format("Y/MM/DD H:mm:ss")
 }
 
-const PostController = {
-    getAll: (req: Request, res: Response) => {
+
+const PostController: PostControllerContract = {
+    getAll: (req, res) => {
 
         const skip = Number(req.query.skip)
         const take = Number(req.query.take)
@@ -35,7 +38,7 @@ const PostController = {
         return
         
     },
-    getById: (req: Request, res: Response) => {
+    getById: (req, res) => {
         if (!req.params.id){
             res.status(400).json("required");
             return
@@ -57,7 +60,7 @@ const PostController = {
 
         res.json(post)
     },
-    create: async (req: Request, res: Response) => {
+    create: async (req, res) => {
         console.log(req.body)
         const body = req.body
 
@@ -90,7 +93,7 @@ const PostController = {
 
         res.status(201).json(post)
     },
-    update: async (req: Request, res: Response) => {
+    update: async (req, res) => {
         const id = req.params.id
         
         if (!id) {
@@ -125,7 +128,7 @@ const PostController = {
         res.status(200).json(post)
     },
 
-    getTimestamp: (req: Request, res: Response) => {
+    getTimestamp: (req, res) => {
         res.json(getDate())
     },
  

@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs'
 import fsPromises from 'fs/promises'
-import { Post, UpdatePostData } from './post.types'
+import { Post, UpdatePostData, PostServiceContract } from './post.types'
 
 
 
@@ -9,8 +9,9 @@ const postsPath = path.join(__dirname, "posts.json")
 
 const posts: Post[] = JSON.parse(fs.readFileSync(postsPath, "utf-8"))
 
-const PostService = {
-    getAll (skip: number, take: number) {
+
+const PostService: PostServiceContract = {
+    getAll (skip, take) {
         if (!skip && !take) {
             return posts
         }
@@ -25,7 +26,7 @@ const PostService = {
 
         return posts.slice(+skip, +skip + +take)
     },
-    getById(id: number) {
+    getById(id) {
         const post = posts.find((pr)=>{
             const isMatch = pr.id === id
             return isMatch   
@@ -43,7 +44,7 @@ const PostService = {
             return null
         }
     },
-    async update(id: number, data: UpdatePostData) {
+    async update(id, data) {
         const postI = posts.findIndex(post => post.id === id)
         if (postI === -1) {
             return null
