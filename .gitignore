@@ -1,2 +1,6 @@
 node_modules/
 package-lock.json
+posts_tags.db
+/prisma/migrations
+.env
+/src/generated/prisma
