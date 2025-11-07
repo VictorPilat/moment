@@ -28,13 +28,19 @@ export type UpdatePostData = Partial<Omit<Post, "id">>
 
 
 export interface PostServiceContract {
-  getAll: (skip: number, take: number) => Promise<Post[] | PostWithTags[]>
+  getAll: (skip?: number, take?: number) => Promise<Post[] | PostWithTags[]>
   getById: (id: number) => Promise<PostWithTags | null>
   create: (data: CreatePostChecked) => Promise<Post | null>
   update: (id: number, data: UpdatePostChecked) => Promise<Post | null>
   delete: (id: number) => Promise<Post | null>
 }
-
+export interface PostRepositoryContract {
+  getAll(skip?: number, take?: number): Promise<PostWithTags[]>
+  getById(id: number): Promise<PostWithTags | null>
+  create(data: CreatePostChecked): Promise<Post | null>
+  update(id: number, data: UpdatePostChecked): Promise<Post | null>
+  delete(id: number): Promise<Post | null>
+}
 export interface PostControllerContract {
   getAll: (req: Request<object, Post[] | string, object, { skip?: string; take?: string }>,res: Response<Post[] | string>) => Promise<void> | void
   getById: (req: Request<{ id: string }, PostWithTags | string, object>,res: Response<PostWithTags | string>) => Promise<void> | void

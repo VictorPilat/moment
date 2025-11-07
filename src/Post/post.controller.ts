@@ -8,25 +8,32 @@ function getDate() {
 }
 
 const PostController: PostControllerContract = {
-  getAll: async (req, res) => {
-    const skip = Number(req.query.skip)
-    const take = Number(req.query.take)
-
-    if (skip && isNaN(+skip)) {
-      res.status(400).json("skip is not a number")
-      return
+  async getAll(req, res) {
+    let skip: number | undefined
+    let take: number | undefined
+    
+    if (req.query.skip) {
+      skip = +req.query.skip
+      if (isNaN(skip)) {
+        res.status(400).json("Skip must be a number")
+        return
+      }
     }
-
-    if (take && isNaN(+take)) {
-      res.status(400).json("take is not a number")
-      return
+    
+    if (req.query.take) {
+      take = +req.query.take
+      if (isNaN(take)) {
+        res.status(400).json("Take must be a number")
+        return
+      }
     }
-
+    
     try {
-      const posts = await PostService.getAll(skip, take) 
+      const posts = await PostService.getAll(skip, take)
       res.status(200).json(posts)
     } catch (error) {
-      res.status(500).json("Error fetching posts")
+      console.error("Error fetching posts:", error)
+      res.status(500).json("Server internal error")
     }
   },
 
