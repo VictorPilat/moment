@@ -2,7 +2,7 @@ import { TagRepositoryContract } from "./tag.types"
 import { client } from "../data/PrismaClient"
 
 export const TagRepository: TagRepositoryContract = {
-   async getAll(skip?: number, take?: number) {
+  async getAll(skip?: number, take?: number) {
     try {
       return await client.tag.findMany({
         ...(skip !== undefined && { skip }),
