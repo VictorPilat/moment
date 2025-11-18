@@ -45,7 +45,7 @@ export interface PostControllerContract {
   getAll: (req: Request<object, Post[] | string, object, { skip?: string; take?: string }>,res: Response<Post[] | string>) => Promise<void> | void
   getById: (req: Request<{ id: string }, PostWithTags | string, object>,res: Response<PostWithTags | string>) => Promise<void> | void
   create: (req: Request<object, Post | string, CreatePost, object>,res: Response<Post | string>) => Promise<void>
-  update: (req: Request<{ id: number }, Post | string, UpdatePost, object>,res: Response<Post | string>) => Promise<void>
+  update: (req: Request<{ id: string }, Post | string, UpdatePost, object>,res: Response<Post | string>) => Promise<void>
   delete: (req: Request<{ id: string }>, res: Response<Post | string>) => Promise<void>
   getTimestamp: (req: Request, res: Response<string>) => void
 }

@@ -16,7 +16,7 @@ export interface LoginCredentials {
 export interface UserControllerContract {
     register: (req: Request<object, object, UserCreate>, res: Response<ErrorResponse | UserAuthResponse>) => Promise<void>
     login: (req: Request<object, object, LoginCredentials>, res: Response<ErrorResponse | UserAuthResponse>) => Promise<void>
-    me: (req: Request<object, object, object>, res: Response<ErrorResponse | UserWithoutPassword>) => Promise<void>
+    me: (req: Request, res: Response) => Promise<void>
 }
 
 export interface UserRepositoryContract {
